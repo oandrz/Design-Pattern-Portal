@@ -170,6 +170,7 @@ public class ChicagoPizzaIngredientFactory implements PizzaIngredientFactory {
 ```
 
 Implementation Technique
+--
 - Factories as `Singleton`, because typically an application needs only one instance of a ConcreteFactory per product variant.
 ```java
 // Chicago Style Become Singleton
