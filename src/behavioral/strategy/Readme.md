@@ -139,4 +139,74 @@ public static void main(String[] args) {
 
 Implementation Technique
 --
-- Defining s
+- Context pass data in parameters to strategy operations. Will keep the data and the strategy decoupled but the trade 
+  off is context might pass the data that doesn't need-ed by the strategy.
+```java
+class InsertionSort implements SortingStrategy {
+  @Override
+  public void sort(int[] arr) {
+    // Do the sorting algorithm
+  }
+}
+
+class SortingSelector {
+
+  private SortingStrategy sortingStrategy;
+
+  public SortingSelector(SortingStrategy sortingStrategy) {
+    this.sortingStrategy = sortingStrategy;
+  }
+
+  // Data from client get passed into the strategy
+  public void execute(int[] arr) {
+    sortingStrategy.sort(arr);
+  }
+}
+```
+- Pass the context into the strategy, strategy can store the reference of the context to eliminate any need to pass to 
+  the strategy, but it will tighten the coupling between the strategy and the context.
+```java
+class InsertionSort implements SortingStrategy {
+  @Override
+  public void sort(SortingSelector selector) {
+    // Do the sorting algorithm
+  }
+}
+
+class SortingSelector {
+
+  private SortingStrategy sortingStrategy;
+  private int[] arr;
+
+  public SortingSelector(SortingStrategy sortingStrategy, int[] arr) {
+    this.sortingStrategy = sortingStrategy;
+    this.arr = arr;
+  }
+
+  // Data from client get passed into the strategy
+  public void execute() {
+    sortingStrategy.sort(this);
+  }
+}
+```
+- Making Strategy object optional. Context will check to see if it has a strategy object if there is one then 
+  context will use the object otherwise context will use the default one.
+```java
+  class SortingSelector {
+
+  private SortingStrategy sortingStrategy;
+
+  // We provide the default implementation just in case client doesn't give us the strategy object
+  public SortingSelector(SortingStrategy sortingStrategy) {
+      if (sortingStrategy == null) {
+          sortingStrategy = new DefaultBehavior();
+      } else {
+          this.sortingStrategy = sortingStrategy;
+      }
+  }
+
+  public void execute(int[] arr) {
+    sortingStrategy.sort(arr);
+  }
+}
+```
