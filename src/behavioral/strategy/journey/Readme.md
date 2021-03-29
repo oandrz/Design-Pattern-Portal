@@ -196,11 +196,121 @@ You're reviewing your solution so far. You learn from First solution when you're
 or quack behavior, and you will duplicate the entire algorithm when you use interface since you can not reuse the code 
 that you already have. After doing some research you find a principle that says 
 `identify the aspects of your application that vary and separate them from what stays the same`. 
-This principle called `separation of concern`. With this principle,
-you decided to `encapsulate the fly behavior and quack behavior from the duck class and to provide more flexibility` 
-when there's another behavior added in the future, you also decided to use a `common interface as an abstraction`.
+This principle called `separation of concern`. 
 
 [![duck.jpg](https://i.postimg.cc/xCLjbSVr/duck.jpg)](https://postimg.cc/G8hnZVpz)
 
 Chapter 6 - Implement Fly Behavior and Quack Behavior
 -
+With the principle, you decided to `encapsulate the fly behavior and quack behavior from the duck class and to provide more flexibility`
+when there's another behavior added in the future, you also decided to use a `common interface as an abstraction`. The interface will be
+implemented by specific behavior class.
+```java
+// We create an separate interface as a common abstraction of our behavior or algorithm class
+public interface FlyBehavior {
+    void fly();
+}
+
+// We create the specific implementation of the abstraction
+public class FlyWithWings implements FlyBehavior {
+    @Override
+    public void fly() {
+        
+    }
+}
+
+public class FlyNoWay implements FlyBehavior {
+    @Override
+    public void fly() {
+
+    }
+}
+
+// We create an separate interface as a common abstraction of our behavior or algorithm class
+public interface QuackBehavior {
+    void quack();
+}
+
+// We create the specific implementation of the abstraction
+public class Quack implements QuackBehavior {
+    @Override
+    public void quack() {
+
+    }
+}
+
+public class Squeak implements QuackBehavior {
+    @Override
+    public void quack() {
+
+    }
+}
+
+public class MuteQuack implements QuackBehavior {
+    @Override
+    public void quack() {
+
+    }
+}
+```
+Chapter 6 - Integration
+-
+You already finished create the behavior class for fly and quack, now it is time for the integration. To integrate the behavior,
+The duck class that you've created before will delegate the action for fly or quack into another instance. This duck class called as a context object.
+And now you're already finished implementing a strategy pattern.
+
+```java
+import behavioral.strategy.code.strategy.fly.FlyBehavior;
+import behavioral.strategy.code.strategy.quack.QuackBehavior;
+
+// Duck will become a context class where it will save the reference of the behavior it's going to use
+public abstract class Duck {
+
+    // create an instance to store the behavior
+    private FlyBehavior flyBehavior;
+    private QuackBehavior quackBehavior;
+    
+    public Duck(FlyBehavior flyBehavior, QuackBehavior quackBehavior) {
+        this.flyBehavior = flyBehavior;
+        this.quackBehavior = quackBehavior;
+    }
+
+    // Context object will delegate the action into the behavior class
+    public void fly() {
+        flyBehavior.fly();
+    }
+
+    public void quack() {
+        quackBehavior.quack();
+    }
+
+    public abstract void display()
+}
+
+//....
+
+public class RubberDuck extends Duck {
+
+    public RubberDuck(FlyBehavior flyBehavior, QuackBehavior quackBehavior) {
+        super(flyBehavior, quackBehavior);
+    }
+    
+    @Override
+    public void display() {
+
+    }
+}
+
+public class DecoyDuck extends Duck {
+
+    public DecoyDuck(FlyBehavior flyBehavior, QuackBehavior quackBehavior) {
+        super(flyBehavior, quackBehavior);
+    }
+    
+    @Override
+    public void display() {
+
+    }
+}
+
+```
