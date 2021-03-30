@@ -1,4 +1,4 @@
-# Strategy Journey, from zero to Abstract Factory
+# Strategy Journey, from zero to Strategy Pattern
 
 Reference: [From Head First Design Pattern, Page 38](https://www.amazon.sg/Head-First-Design-Patterns-Freeman/dp/0596007124/ref=sr_1_2?adgrpid=101389983568&dchild=1&gclid=Cj0KCQiA-aGCBhCwARIsAHDl5x_DlEYb0pYYtmgAr9cjXVF0QGmTTsS1GiKGXUoePvave7whzGWPw7UaAuEpEALw_wcB&hvadid=419844191966&hvdev=c&hvlocphy=9062530&hvnetw=g&hvqmt=b&hvrand=11603187779769807271&hvtargid=kwd-309863667&hydadcr=21310_51059&keywords=head+first+design+patterns&qid=1615381361&sr=8-2)
 
