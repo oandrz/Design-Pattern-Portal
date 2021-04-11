@@ -1,3 +1,4 @@
+import behavioral.strategy.code.duck.Duck
 import behavioral.strategy.code.duck.MallardDuck
 import behavioral.strategy.code.strategy.fly.FlyNoWay
 import behavioral.strategy.code.strategy.fly.FlyWithWings
@@ -5,6 +6,8 @@ import behavioral.strategy.code.strategy.quack.Quack
 import creational.abstractfactory.main.factory.ChicagoPizzaIngredientFactory
 import creational.abstractfactory.main.factory.NewYorkPizzaIngredientFactory
 import creational.abstractfactory.main.factory.PizzaIngredientFactory
+import structural.adapter.code.DuckAdapter
+import structural.adapter.code.turkey.WildTurkey
 
 fun main() {
     factoryExample()
@@ -43,4 +46,17 @@ private fun strategyExample() {
         performFly()
         performQuack()
     }
+}
+
+private fun adapterExample() {
+    val duck = structural.adapter.code.duck.MallardDuck()
+    //First create the adaptee
+    val turkey = WildTurkey()
+
+    // Create the adapter
+    val adapter: structural.adapter.code.duck.Duck = DuckAdapter(turkey)
+
+    // All action will be delegate into the adaptee
+    adapter.quack()
+    adapter.fly()
 }

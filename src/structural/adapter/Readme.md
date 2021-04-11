@@ -90,4 +90,40 @@ class BritainElectricityOutletAdapter extends BritainElectricityOutlet {
 ```
 Implementation Technique
 --
+- Using abstraction operations. Define abstract operation for the adaptee interface. Adapter class must implement the 
+  abstract operation and adapt the behavior accordingly
+```java
+// Target Class
+class TreeDisplay {
+    protected Child getChildren(Node node) {
+        // Do process to get the tree child
+    }
+    
+    protected Node createGraphicNode(Node node) {
+        // Do process to create graphical node
+    } 
+    
+    private void display() {
+        // Do Display process here
+    }
+}
 
+// Adapter class
+class DirectoryTreeDisplay {
+    
+    @Override
+    public Child getChildren(Node node) {
+        // Adapt behavior to support directory structure of FileSystemEntity here
+    }
+    
+    @Override
+    public Node createGraphicNode(Node node) {
+        // Adapt the behavior to support FileSystemEntity
+    }
+}
+
+// Adaptee Class
+class FileSystemEntity {
+    
+}
+```
